@@ -30,7 +30,7 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col>
-            <v-card>
+            <v-card class="mx-auto" max-width="400">
               <v-toolbar flat color="#c12f93" dark>
                 <v-toolbar-title>Submit a post to twitter</v-toolbar-title>
               </v-toolbar>
@@ -70,7 +70,9 @@
 
               <v-card-text
                 class="headline font-weight-bold"
-              >{{ input1 }}</v-card-text>
+              >
+              {{ input1 }}
+              </v-card-text>
 
               <v-card-actions>
                 <v-list-item class="grow">
@@ -101,7 +103,7 @@
     </v-content>
 
     <v-footer app>
-      <span>&copy; 2019</span>
+      <span>&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
