@@ -30,7 +30,7 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col>
-            <v-card class="mx-auto" max-width="344">
+            <v-card class="mx-auto" max-width="400">
               <v-card-text>
                 <div>Word of the Day</div>
                 <p class="display-1 text--primary">be•nev•o•lent</p>
@@ -41,7 +41,9 @@
                 </div>
               </v-card-text>
               <v-card-actions>
-                <v-btn text color="deep-purple accent-4">Learn More</v-btn>
+                <v-btn>
+                  <v-icon>Email</v-icon>
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -91,6 +93,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     source: String
