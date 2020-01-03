@@ -32,16 +32,15 @@
           <v-col>
             <v-card>
               <v-toolbar flat color="#c12f93" dark>
-                <v-toolbar-title>Submit a post</v-toolbar-title>
+                <v-toolbar-title>Submit a post to twitter</v-toolbar-title>
               </v-toolbar>
 
               <v-card-text>
-                <v-text-field filled label="Title" value="My new post"></v-text-field>
-
-                <v-textarea
+                <v-textarea v-model="input1"
                   filled
+                  color="white"
                   label="Text"
-                  value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse"
+                  value="Hello my name is Rashad Madison and I am looking for work as a frontend developer"
                 ></v-textarea>
 
               </v-card-text>
@@ -50,7 +49,17 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="#c12f93" depressed>Post</v-btn>
+                <v-btn color="#c12f93" depressed>
+                  <v-icon>
+                    mdi-auto-fix
+                  </v-icon>
+                  Enhance
+                </v-btn>
+                <v-btn color="#c12f93" depressed>
+                  <v-icon>
+                    mdi-twitter
+                  </v-icon>
+                  Post</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -63,7 +72,7 @@
 
               <v-card-text
                 class="headline font-weight-bold"
-              >"Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well."</v-card-text>
+              >{{ input1 }}</v-card-text>
 
               <v-card-actions>
                 <v-list-item class="grow">
@@ -105,7 +114,8 @@ export default {
     source: String
   },
   data: () => ({
-    drawer: null
+    drawer: null,
+    input1: ''
   }),
   created() {
     this.$vuetify.theme.dark = true;
