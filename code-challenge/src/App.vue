@@ -30,21 +30,21 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card color="white" class="mx-auto" max-width="400">
+              <v-row cols="12" md="6">
               <v-card-text>
-                <div>Word of the Day</div>
                 <p class="display-1 text--primary">be•nev•o•lent</p>
-                <p>adjective</p>
-                <div class="text--primary">
-                  well meaning and kindly.
-                  <br />"a benevolent smile"
-                </div>
               </v-card-text>
+              </v-row>
               <v-card-actions>
-                <v-btn>
-                  <v-icon class="mr-1">mdi-auto-fix</v-icon>
-                  Enhance
-                </v-btn>
+                <v-row cols="12" md="6" no-gutters>
+                  <v-textarea color="white" solo name="input-7-4" label="Solo textarea"></v-textarea>
+                </v-row>
+                <v-row cols="12" md="6" no-gutters>
+                  <v-btn>
+                    <v-icon class="mr-1">mdi-auto-fix</v-icon>Enhance
+                  </v-btn>
+                </v-row>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -94,7 +94,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     source: String
