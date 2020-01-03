@@ -31,7 +31,7 @@
         <v-row align="center" justify="center">
           <v-col>
             <v-card>
-              <v-toolbar flat color="blue-grey" dark>
+              <v-toolbar flat color="#c12f93" dark>
                 <v-toolbar-title>Submit a post</v-toolbar-title>
               </v-toolbar>
 
@@ -50,7 +50,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="success" depressed>Post</v-btn>
+                <v-btn color="#c12f93" depressed>Post</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
