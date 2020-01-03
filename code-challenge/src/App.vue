@@ -45,8 +45,6 @@
 
               </v-card-text>
 
-              <v-divider></v-divider>
-
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="#c12f93" depressed>
@@ -79,12 +77,12 @@
                   <v-list-item-avatar color="grey darken-3">
                     <v-img
                       class="elevation-6"
-                      src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                      :src="profileImg"
                     ></v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title>Evan You</v-list-item-title>
+                    <v-list-item-title>{{ userName }}</v-list-item-title>
                   </v-list-item-content>
 
                   <v-row align="center" justify="end">
@@ -115,7 +113,9 @@ export default {
   },
   data: () => ({
     drawer: null,
-    input1: ''
+    input1: 'Hello my name is Rashad Madison and at the moment I am looking for work as a frontend developer. ',
+    profileImg: "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
+    userName: "John Doe",
   }),
   created() {
     this.$vuetify.theme.dark = true;
