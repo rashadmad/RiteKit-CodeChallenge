@@ -36,28 +36,23 @@
               </v-toolbar>
 
               <v-card-text>
-                <v-textarea v-model="input1"
+                <v-textarea
+                  v-model="input1"
                   filled
                   color="white"
                   label="Text"
                   value="Hello my name is Rashad Madison and I am looking for work as a frontend developer"
                 ></v-textarea>
-
               </v-card-text>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="#c12f93" depressed>
-                  <v-icon>
-                    mdi-auto-fix
-                  </v-icon>
-                  Enhance
+                  <v-icon>mdi-auto-fix</v-icon>Enhance
                 </v-btn>
                 <v-btn color="#c12f93" depressed>
-                  <v-icon>
-                    mdi-twitter
-                  </v-icon>
-                  Post</v-btn>
+                  <v-icon>mdi-twitter</v-icon>Post
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -68,19 +63,12 @@
                 <span class="title font-weight-light">Twitter</span>
               </v-card-title>
 
-              <v-card-text
-                class="headline font-weight-bold"
-              >
-              {{ input1 }}
-              </v-card-text>
+              <v-card-text class="headline font-weight-bold">{{ input1 }}</v-card-text>
 
               <v-card-actions>
                 <v-list-item class="grow">
                   <v-list-item-avatar color="grey darken-3">
-                    <v-img
-                      class="elevation-6"
-                      :src="profileImg"
-                    ></v-img>
+                    <v-img class="elevation-6" :src="profileImg"></v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
@@ -115,12 +103,20 @@ export default {
   },
   data: () => ({
     drawer: null,
-    input1: 'Hello my name is Rashad Madison and at the moment I am looking for work as a frontend developer. ',
-    profileImg: "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
+    input1:
+      "Hello my name is Rashad Madison and at the moment I am looking for work as a frontend developer. ",
+    profileImg:
+      "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
     userName: "John Doe",
+    data: ''
   }),
   created() {
     this.$vuetify.theme.dark = true;
+  },
+  mounted() {
+    axios
+      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a")
+      .then(response => (this.data = response));
   }
 };
 </script>
