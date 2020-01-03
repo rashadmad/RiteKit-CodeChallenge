@@ -42,7 +42,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-btn>
-                  <v-icon>Email</v-icon>
+                  <v-icon class="mr-1">mdi-auto-fix</v-icon>
+                  Enhance
                 </v-btn>
               </v-card-actions>
             </v-card>
