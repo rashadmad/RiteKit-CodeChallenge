@@ -30,21 +30,27 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col>
-            <v-card color="white" class="mx-auto" max-width="400">
-              <v-row cols="12" md="6">
+            <v-card>
+              <v-toolbar flat color="blue-grey" dark>
+                <v-toolbar-title>Submit a post</v-toolbar-title>
+              </v-toolbar>
+
               <v-card-text>
-                <p class="display-1 text--primary">be•nev•o•lent</p>
+                <v-text-field filled label="Title" value="My new post"></v-text-field>
+
+                <v-textarea
+                  filled
+                  label="Text"
+                  value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse"
+                ></v-textarea>
+
               </v-card-text>
-              </v-row>
+
+              <v-divider></v-divider>
+
               <v-card-actions>
-                <v-row cols="12" md="6" no-gutters>
-                  <v-textarea color="white" solo name="input-7-4" label="Solo textarea"></v-textarea>
-                </v-row>
-                <v-row cols="12" md="6" no-gutters>
-                  <v-btn>
-                    <v-icon class="mr-1">mdi-auto-fix</v-icon>Enhance
-                  </v-btn>
-                </v-row>
+                <v-spacer></v-spacer>
+                <v-btn color="success" depressed>Post</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
