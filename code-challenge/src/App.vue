@@ -37,7 +37,7 @@
 
               <v-form ref="form">
                 <v-alert v-if="failedRequest" class="ma-md-3" dense outlined type="error">
-                  {{ error }}
+                  {{ errorMessage }}
                   <strong>type</strong> of info
                 </v-alert>
                 <v-textarea
@@ -97,7 +97,7 @@
     </v-content>
 
     <v-footer app>
-      <span>&copy; 2020 {{ data }}</span>
+      <span>&copy; 2020 {{ returnedData }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -117,7 +117,7 @@ export default {
     profileImg:
       "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
     userName: "John Doe",
-    data: [],
+    returnedData: '',
     clientID: process.env.VUE_APP_Client_ID,
     clientSecret: process.env.VUE_APP_Client_Secret,
     inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"],
@@ -139,19 +139,11 @@ export default {
   mounted() {
     axios
       .get(
-        "https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=" +
+        "https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&cliednt_id=" +
           this.clientID
       )
-      .then(function(response) {
-        this.data = response;
-      })
-      .catch(function(error) {
-        this.errorMessage = error;
-      })
-      .finally(function() {
-        // always executed
-        console.log(this.data);
-      });
+      .then(response => (this.returnedData = response))
+      .catch(error => (this.errorMessage = error))
   }
 };
 </script>
