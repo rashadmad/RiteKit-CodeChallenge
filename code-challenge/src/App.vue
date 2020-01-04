@@ -91,7 +91,7 @@
     </v-content>
 
     <v-footer app>
-      <span>&copy; 2020</span>
+      <span>&copy; 2020 {{ data }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -112,7 +112,7 @@ export default {
     profileImg:
       "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
     userName: "John Doe",
-    data: '',
+    data: [],
     clientID: process.env.VUE_APP_Client_ID,
     clientSecret: process.env.VUE_APP_Client_Secret
   }),
@@ -129,9 +129,8 @@ export default {
       })
       .finally(function () {
         // always executed
-        alert(this.clientID);
+        console.log(this.data);
     });
   }
 };
 </script>
-https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a
