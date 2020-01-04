@@ -99,6 +99,7 @@
 <script>
 
 import axios from 'axios';
+require('dotenv').config();
 
 export default {
   props: {
@@ -111,14 +112,16 @@ export default {
     profileImg:
       "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
     userName: "John Doe",
-    data: ''
+    data: '',
+    clientID: process.env.VUE_APP_Client_ID,
+    clientSecret: process.env.VUE_APP_Client_Secret
   }),
   created() {
     this.$vuetify.theme.dark = true;
   },
   mounted() {
     axios
-      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=".concat(process.env.Client_ID))
+      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id='this.clientID'")
       .then(response => (this.data = response))
       .catch(function (error) {
         // handle error
@@ -126,7 +129,7 @@ export default {
       })
       .finally(function () {
         // always executed
-        alert("it worked");
+        alert(this.clientID);
     });
   }
 };
