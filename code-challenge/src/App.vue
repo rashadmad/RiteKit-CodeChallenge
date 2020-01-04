@@ -121,7 +121,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id='this.clientID'")
+      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=" + this.clientID)
       .then(response => (this.data = response))
       .catch(function (error) {
         // handle error
