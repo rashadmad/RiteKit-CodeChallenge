@@ -36,7 +36,10 @@
               </v-toolbar>
 
               <v-form ref="form">
-
+                <v-alert v-if="failedRequest" class="ma-md-3" dense outlined type="error">
+                  {{ error }}
+                  <strong>type</strong> of info
+                </v-alert>
                 <v-textarea
                   class="pa-md-3"
                   v-model="postData"
@@ -45,7 +48,7 @@
                   label="Prepare your twitter post for the world"
                   value="Hello my name is Rashad Madison and I am looking for work as a frontend developer"
                   :rules="inputRules"
-                  ></v-textarea>
+                ></v-textarea>
               </v-form>
 
               <v-card-actions>
@@ -53,7 +56,7 @@
                 <v-btn color="#c12f93" depressed>
                   <v-icon>mdi-auto-fix</v-icon>Enhance
                 </v-btn>
-                <v-btn @click="submit" color="#c12f93" depressed>
+                <v-btn @click="submit" :loading="loading" color="#c12f93" depressed>
                   <v-icon>mdi-twitter</v-icon>Post
                 </v-btn>
               </v-card-actions>
@@ -100,9 +103,8 @@
 </template>
 
 <script>
-
-//import axios from 'axios';
-require('dotenv').config();
+import axios from 'axios';
+require("dotenv").config();
 
 export default {
   props: {
@@ -118,33 +120,38 @@ export default {
     data: [],
     clientID: process.env.VUE_APP_Client_ID,
     clientSecret: process.env.VUE_APP_Client_Secret,
-    inputRules: [
-      v => v.length >= 3 || 'Minimum length is 3 characters'
-    ]
+    inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"],
+    loading: false,
+    failedRequest: false,
+    errorMessage: ''
   }),
   methods: {
     submit() {
-      if(this.$ref.form.validate()){
-        console.log(this.postData)
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        console.log(this.postData);
       }
     }
   },
   created() {
     this.$vuetify.theme.dark = true;
+  },
+  mounted() {
+    axios
+      .get(
+        "https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=" +
+          this.clientID
+      )
+      .then(function(response) {
+        this.data = response;
+      })
+      .catch(function(error) {
+        this.errorMessage = error;
+      })
+      .finally(function() {
+        // always executed
+        console.log(this.data);
+      });
   }
-  // ,
-  // mounted() {
-  //   axios
-  //     .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=" + this.clientID)
-  //     .then(response => (this.data = response))
-  //     .catch(function (error) {
-  //       // handle error
-  //       alert(error);
-  //     })
-  //     .finally(function () {
-  //       // always executed
-  //       console.log(this.data);
-  //   });
-  // }
 };
 </script>
