@@ -36,7 +36,7 @@
               </v-toolbar>
 
               <v-form ref="form">
-                <v-alert v-if="failedRequest" class="ma-md-3" dense outlined type="error">
+                <v-alert v-if="failedRequest" class="ma-3 md-3" dense outlined type="error">
                   {{ errorMessage }}
                   <strong>type</strong> of info
                 </v-alert>
@@ -139,11 +139,11 @@ export default {
   mounted() {
     axios
       .get(
-        "https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&cliednt_id=" +
+        "https://api.ritekit.com/v1/stats/xmultiple-hashtags?tags=php&cliednt_id=" +
           this.clientID
       )
       .then(response => (this.returnedData = response))
-      .catch(error => (this.errorMessage = error))
+      .catch(error => (this.errorMessage = error, this.failedRequest = true))
   }
 };
 </script>
