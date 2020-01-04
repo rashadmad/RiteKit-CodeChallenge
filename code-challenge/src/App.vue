@@ -35,22 +35,25 @@
                 <v-toolbar-title>Submit a post to twitter</v-toolbar-title>
               </v-toolbar>
 
-              <v-card-text>
+              <v-form ref="form">
+
                 <v-textarea
-                  v-model="input1"
+                  class="pa-md-3"
+                  v-model="postData"
                   filled
                   color="white"
-                  label="Text"
+                  label="Prepare your twitter post for the world"
                   value="Hello my name is Rashad Madison and I am looking for work as a frontend developer"
-                ></v-textarea>
-              </v-card-text>
+                  :rules="inputRules"
+                  ></v-textarea>
+              </v-form>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="#c12f93" depressed>
                   <v-icon>mdi-auto-fix</v-icon>Enhance
                 </v-btn>
-                <v-btn color="#c12f93" depressed>
+                <v-btn @click="submit" color="#c12f93" depressed>
                   <v-icon>mdi-twitter</v-icon>Post
                 </v-btn>
               </v-card-actions>
@@ -63,7 +66,7 @@
                 <span class="title font-weight-light">Twitter</span>
               </v-card-title>
 
-              <v-card-text class="headline font-weight-bold">{{ input1 }}</v-card-text>
+              <v-card-text class="headline font-weight-bold">{{ postData }}</v-card-text>
 
               <v-card-actions>
                 <v-list-item class="grow">
@@ -98,7 +101,7 @@
 
 <script>
 
-import axios from 'axios';
+//import axios from 'axios';
 require('dotenv').config();
 
 export default {
@@ -107,30 +110,41 @@ export default {
   },
   data: () => ({
     drawer: null,
-    input1:
+    postData:
       "Hello my name is Rashad Madison and at the moment I am looking for work as a frontend developer. ",
     profileImg:
       "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
     userName: "John Doe",
     data: [],
     clientID: process.env.VUE_APP_Client_ID,
-    clientSecret: process.env.VUE_APP_Client_Secret
+    clientSecret: process.env.VUE_APP_Client_Secret,
+    inputRules: [
+      v => v.length >= 3 || 'Minimum length is 3 characters'
+    ]
   }),
+  methods: {
+    submit() {
+      if(this.$ref.form.validate()){
+        console.log(this.postData)
+      }
+    }
+  },
   created() {
     this.$vuetify.theme.dark = true;
-  },
-  mounted() {
-    axios
-      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=" + this.clientID)
-      .then(response => (this.data = response))
-      .catch(function (error) {
-        // handle error
-        alert(error);
-      })
-      .finally(function () {
-        // always executed
-        console.log(this.data);
-    });
   }
+  // ,
+  // mounted() {
+  //   axios
+  //     .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=" + this.clientID)
+  //     .then(response => (this.data = response))
+  //     .catch(function (error) {
+  //       // handle error
+  //       alert(error);
+  //     })
+  //     .finally(function () {
+  //       // always executed
+  //       console.log(this.data);
+  //   });
+  // }
 };
 </script>
