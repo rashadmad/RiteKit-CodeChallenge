@@ -40,6 +40,10 @@
                   {{ errorMessage }}
                   <strong>type</strong> of info
                 </v-alert>
+                <v-alert v-else color="#c12f93" class="ma-3 md-3" dense type="info">
+                  {{ errorMessage }}
+                  when ready press post to see the <strong>magic</strong>
+                </v-alert>
                 <v-textarea
                   class="pa-md-3"
                   v-model="postData"
@@ -49,17 +53,13 @@
                   value="Hello my name is Rashad Madison and I am looking for work as a frontend developer"
                   :rules="inputRules"
                 >
-                {{postData}}
                 </v-textarea>
               </v-form>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="#c12f93" depressed>
-                  <v-icon>mdi-auto-fix</v-icon>Enhance
-                </v-btn>
                 <v-btn @click="submit" :loading="loading" color="#c12f93" depressed>
-                  <v-icon>mdi-twitter</v-icon>Post
+                  <v-icon>mdi-auto-fix</v-icon>Post
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -71,7 +71,7 @@
                 <span class="title font-weight-light">Twitter</span>
               </v-card-title>
 
-              <v-card-text v-if="this.postData.post" class="headline font-weight-bold">{{postData.post}}</v-card-text>
+              <v-card-text v-if="returnedData.post" class="headline font-weight-bold">{{returnedData.post}}</v-card-text>
               <v-card-text v-else class="headline font-weight-bold">{{postData}}</v-card-text>
 
               <v-card-actions>
@@ -133,7 +133,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true;
         axios.post("https://api.ritekit.com/v1/stats/auto-hashtag?post=" + this.postData + this.clientID)
-        .then(response => (this.postData = response.data, this.loading = false, console.log((this.postData.post))))
+        .then(response => (this.returnedData = response.data, this.loading = false, console.log((this.returnedData.post))))
         .catch(error => (this.errorMessage = error, this.failedRequest = true, this.loading = false));
       }
     }
