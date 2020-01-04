@@ -97,6 +97,9 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
   props: {
     source: String
@@ -115,8 +118,17 @@ export default {
   },
   mounted() {
     axios
-      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a")
-      .then(response => (this.data = response));
+      .get("https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=".concat(process.env.Client_ID))
+      .then(response => (this.data = response))
+      .catch(function (error) {
+        // handle error
+        alert(error);
+      })
+      .finally(function () {
+        // always executed
+        alert("it worked");
+    });
   }
 };
 </script>
+https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a
