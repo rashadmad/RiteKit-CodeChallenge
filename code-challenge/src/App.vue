@@ -48,7 +48,9 @@
                   label="Prepare your twitter post for the world"
                   value="Hello my name is Rashad Madison and I am looking for work as a frontend developer"
                   :rules="inputRules"
-                ></v-textarea>
+                >
+                {{postData}}
+                </v-textarea>
               </v-form>
 
               <v-card-actions>
@@ -69,7 +71,8 @@
                 <span class="title font-weight-light">Twitter</span>
               </v-card-title>
 
-              <v-card-text class="headline font-weight-bold">{{ postData }}</v-card-text>
+              <v-card-text v-if="this.postData.post" class="headline font-weight-bold">{{postData.post}}</v-card-text>
+              <v-card-text v-else class="headline font-weight-bold">{{postData}}</v-card-text>
 
               <v-card-actions>
                 <v-list-item class="grow">
@@ -97,7 +100,7 @@
     </v-content>
 
     <v-footer app>
-      <span>&copy; 2020 {{ returnedData }}</span>
+      <span>&copy; 2020 {{ this.postData }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -118,7 +121,7 @@ export default {
       "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
     userName: "John Doe",
     returnedData: '',
-    clientID: process.env.VUE_APP_Client_ID,
+    clientID: "&client_id=" + process.env.VUE_APP_Client_ID,
     clientSecret: process.env.VUE_APP_Client_Secret,
     inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"],
     loading: false,
@@ -129,21 +132,14 @@ export default {
     submit() {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        console.log(this.postData);
+        axios.post("https://api.ritekit.com/v1/stats/auto-hashtag?post=" + this.postData + this.clientID)
+        .then(response => (this.postData = response.data, this.loading = false, console.log((this.postData.post))))
+        .catch(error => (this.errorMessage = error, this.failedRequest = true, this.loading = false));
       }
     }
   },
   created() {
     this.$vuetify.theme.dark = true;
-  },
-  mounted() {
-    axios
-      .get(
-        "https://api.ritekit.com/v1/stats/xmultiple-hashtags?tags=php&cliednt_id=" +
-          this.clientID
-      )
-      .then(response => (this.returnedData = response))
-      .catch(error => (this.errorMessage = error, this.failedRequest = true))
   }
 };
 </script>
