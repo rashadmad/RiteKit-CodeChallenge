@@ -1,33 +1,22 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app clipped>
-      <v-list dense>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-settings</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app clipped-left>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
+    <v-app-bar color="#c12f93" app clipped-left>
+      <v-toolbar-title>
+        <v-img
+          src="https://cdn.ritekit.com/assets/img/ritetag/logo.svg"
+          max-width="190"
+          max-height="70"
+        ></v-img>
+      </v-toolbar-title>
     </v-app-bar>
 
-    <v-content>
+    <v-content color="white">
       <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center"><h1 class="display-4">RiteTag</h1></v-row>
+        
+        <blockquote
+          class="mx-auto blockquote"
+        >Schedule remarkable post with instant hashtags, emojis, GIFs and CTAs.</blockquote>
         <v-row align="center" justify="center">
           <v-col>
             <v-card class="mx-auto" max-width="400">
@@ -42,7 +31,8 @@
                 </v-alert>
                 <v-alert v-else color="#c12f93" class="ma-3 md-3" dense type="info">
                   {{ errorMessage }}
-                  when ready press post to see the <strong>magic</strong>
+                  when ready press post to see the
+                  <strong>magic</strong>
                 </v-alert>
                 <v-textarea
                   class="pa-md-3"
@@ -52,8 +42,7 @@
                   label="Prepare your twitter post for the world"
                   value="Hello my name is Rashad Madison and I am looking for work as a frontend developer"
                   :rules="inputRules"
-                >
-                </v-textarea>
+                ></v-textarea>
               </v-form>
 
               <v-card-actions>
@@ -71,7 +60,10 @@
                 <span class="title font-weight-light">Twitter</span>
               </v-card-title>
 
-              <v-card-text v-if="returnedData.post" class="headline font-weight-bold">{{returnedData.post}}</v-card-text>
+              <v-card-text
+                v-if="returnedData.post"
+                class="headline font-weight-bold"
+              >{{returnedData.post}}</v-card-text>
               <v-card-text v-else class="headline font-weight-bold">{{postData}}</v-card-text>
 
               <v-card-actions>
@@ -100,13 +92,13 @@
     </v-content>
 
     <v-footer app>
-      <span>&copy; 2020 {{ this.postData }}</span>
+      <span>&copy;</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 require("dotenv").config();
 
 export default {
@@ -120,21 +112,36 @@ export default {
     profileImg:
       "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
     userName: "John Doe",
-    returnedData: '',
+    returnedData: "",
     clientID: "&client_id=" + process.env.VUE_APP_Client_ID,
     clientSecret: process.env.VUE_APP_Client_Secret,
     inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"],
     loading: false,
     failedRequest: false,
-    errorMessage: ''
+    errorMessage: ""
   }),
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        axios.post("https://api.ritekit.com/v1/stats/auto-hashtag?post=" + this.postData + this.clientID)
-        .then(response => (this.returnedData = response.data, this.loading = false, console.log((this.returnedData.post))))
-        .catch(error => (this.errorMessage = error, this.failedRequest = true, this.loading = false));
+        axios
+          .post(
+            "https://api.ritekit.com/v1/stats/auto-hashtag?post=" +
+              this.postData +
+              this.clientID
+          )
+          .then(
+            response => (
+              (this.returnedData = response.data), (this.loading = false)
+            )
+          )
+          .catch(
+            error => (
+              (this.errorMessage = error),
+              (this.failedRequest = true),
+              (this.loading = false)
+            )
+          );
       }
     }
   },
